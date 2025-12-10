@@ -1,37 +1,27 @@
 import React from 'react';
 
-type State = {
-  name: string;
+type Props = {
+  pressedKey: string;
 };
 
-export class PressedKey extends React.Component<{}, State> {
-  state: Readonly<State> = {
-    name: '',
-  };
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleKeyDown = (event: KeyboardEvent) => {
-    this.setState({ name: event.key });
-  };
-
+export class PressedKey extends React.Component<Props> {
+  
   render() {
-    const { name } = this.state;
+    const { pressedKey } = this.props;
 
     return (
-      <div>
-        {name === '' ? (
-          <p>Nothing was pressed yet</p>
-        ) : (
-          <p>The last pressed key is [{name}]</p>
-        )}
+      <div className="App">
+            {
+                pressedKey === '' 
+                ? (
+                <p className="App__message">Nothing was pressed yet</p>
+                ) 
+                : (
+                <p className="App__message">The last pressed key is [{pressedKey}]</p>
+                )
+            }
       </div>
+
     );
   }
 }
